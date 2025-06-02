@@ -3,86 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>WhatsApp Chat UI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <title>Chat Unlock</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <div class="chat-container">
     <div class="chat-header">
-      <img src="dp.jpg" class="dp" alt="DP">
-      <div class="contact-info">
-        <div class="contact-name">Test</div>
-        <div class="contact-subtext">online</div>
-      </div>
-      <div class="header-icons">
-        <i class="material-icons">videocam</i>
-        <i class="material-icons">call</i>
-        <i class="material-icons">more_vert</i>
+      <img src="dp.jpg" alt="DP" />
+      <div class="chat-info">
+        <div class="name">Nethuki 💋</div>
+        <div class="status">typing...</div>
       </div>
     </div>
-
-    <div class="chat-body" id="chat-body">
-      <div class="encryption-banner">
-        🔒 Messages and calls are end-to-end encrypted. Only people in this chat can read, listen to, or share them.
-      </div>
+    <div class="chat-body" id="chatBody">
+      <!-- Messages will be inserted here -->
     </div>
-
-    <button class="share-button" id="shareBtn" onclick="shareToWhatsApp()">🔐 Share to Unlock Chat</button>
-    <button class="send-button" id="sendPhotosBtn" onclick="sendPhotos()">📷 Send Photos</button>
-
     <div class="chat-footer">
-      <input type="text" placeholder="Message" disabled>
+      <input type="text" placeholder="Message" disabled />
       <i class="material-icons">send</i>
     </div>
+    <button id="shareBtn" class="share-button">Share to Unlock Chat 🔓</button>
+    <button id="sendPhotosBtn" class="send-button">Send Photos 📸</button>
   </div>
 
   <script>
+    const chatBody = document.getElementById("chatBody");
+    const shareBtn = document.getElementById("shareBtn");
+    const sendPhotosBtn = document.getElementById("sendPhotosBtn");
+
     const messages = [
-      "හායි පැටියො 🥵🔥",
-      "Chat එක Lock කරලා තියෙන්නෙ.Unlock කරගන සැපක් ගන්න ඕනෙනම් පහල විදියට කරන්න😘",
-      "යට තියෙන Share To Unlock Click කරලා කෙලිංම Whatsapp Group 3 කට Share කරන්න",
-      "Share කරපු Msg 3 Screenshot 3 ක් Send Photos ගිහිං මට එවන්න පැටියෝ 😘💕 හරියටම කරලද බලලා මන් Chat එක Unlock කරලා හොද සැපක් දෙන්නම් 🥵💦"
+      "Hello baby 🥰",
+      "Mama video call ekakata ready 🔥",
+      "Share karala awoth video call link eka denna 😘",
+      "Eka share karala danne mokak hari kiyala...😉"
     ];
 
-    const chatBody = document.getElementById('chat-body');
-    const shareBtn = document.getElementById('shareBtn');
-    const sendPhotosBtn = document.getElementById('sendPhotosBtn');
-
-    window.onload = () => {
-      messages.forEach((msg, index) => {
+    function addMessage(text, delay) {
+      setTimeout(() => {
+        const messageEl = document.createElement("div");
+        messageEl.className = "message";
+        messageEl.textContent = text;
+        messageEl.style.opacity = "0";
+        chatBody.appendChild(messageEl);
         setTimeout(() => {
-          const messageEl = document.createElement('div');
-          messageEl.className = 'message';
-          messageEl.textContent = msg;
-          chatBody.appendChild(messageEl);
-          chatBody.scrollTop = chatBody.scrollHeight;
-        }, (index + 1) * 2000);
-      });
+          messageEl.style.opacity = "1";
+        }, 50);
+      }, delay);
+    }
 
+    let totalDelay = 0;
+    messages.forEach((msg, i) => {
+      totalDelay += 2000;
+      addMessage(msg, totalDelay);
+    });
+
+    setTimeout(() => {
+      shareBtn.style.display = "block";
+    }, totalDelay + 1000);
+
+    shareBtn.addEventListener("click", () => {
+      const text = `වයස 21 බෝනික්කියෙක් වගේ කෙල්ලෙක්ගෙන් Free වීඩියෝ කෝල් ෆන් ගන්න පහල Link එකෙන් එන්න 🥵💦
+
+https://chat-wa.github.io/nethuki-fdo/`;
+      const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank");
+
+      shareBtn.style.display = "none";
       setTimeout(() => {
-        shareBtn.style.display = "block";
-      }, messages.length * 2000 + 1000);
-    };
-
-    function shareToWhatsApp() {
-      const msg = encodeURIComponent(
-        "වයස 21 බෝනික්කියෙක් වගේ කෙල්ලෙක්ගෙන් Free වීඩියෝ කෝල් ෆන් ගන්න පහල Link එකෙන් එන්න 🥵💦\n\nhttps://chat-wa.github.io/nethuki-fdo/"
-      );
-      const link = `https://wa.me/?text=${msg}`;
-      window.location.href = link;
-
-      // After 5 seconds, show send photos
-      setTimeout(() => {
-        shareBtn.style.display = "none";
         sendPhotosBtn.style.display = "block";
       }, 5000);
-    }
+    });
 
-    function sendPhotos() {
+    sendPhotosBtn.addEventListener("click", () => {
       window.location.href = "https://diagnosisscript.com/dcf7x23r83?key=2ac6355133543eecf956d375da68f7b6";
-    }
+    });
   </script>
 </body>
 </html>
