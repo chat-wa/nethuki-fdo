@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Chat UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.querySelector(".send-button").style.display = "block";
+      }, 2000);
+    };
+
+    function sendPhotos() {
+      window.location.href = "https://your-link-here.com"; // Change this to your redirect link
+    }
+  </script>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <img src="dp.jpg" class="dp" alt="DP">
+      <div class="contact-info">
+        <div class="contact-name">Test</div>
+        <div class="contact-subtext">online</div>
+      </div>
+      <div class="header-icons">
+        <i class="material-icons">videocam</i>
+        <i class="material-icons">call</i>
+        <i class="material-icons">more_vert</i>
+      </div>
+    </div>
+
+    <div class="chat-body">
+      <div class="encryption-banner">
+        🔒 Messages and calls are end-to-end encrypted. Only people in this chat can read, listen to, or share them.
+      </div>
+
+      <button class="send-button" onclick="sendPhotos()">📷 Send Photos</button>
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" placeholder="Message" disabled>
+    </div>
+  </div>
+</body>
+</html>
