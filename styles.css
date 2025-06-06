@@ -116,27 +116,53 @@ body {
   }
 }
 
-.send-button, .share-button {
-  display: none;
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
   position: absolute;
-  bottom: 100px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 15px 30px;
-  background-color: var(--light-green);
-  border: none;
+  bottom: 70px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.share-button, .send-button {
+  flex: 1;
+  margin: 0 5px;
+  padding: 12px 10px;
   border-radius: 30px;
-  color: white;
-  font-size: 16px;
+  border: none;
   font-weight: bold;
+  font-size: 15px;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
   transition: all 0.3s ease;
 }
 
-.send-button:hover, .share-button:hover {
+.share-button {
+  background-color: var(--light-green);
+  color: white;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+.share-button:hover {
   background-color: #1faa5a;
-  transform: translateX(-50%) scale(1.05);
+}
+
+.send-button {
+  background-color: #cfcfcf;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.send-button.enabled {
+  background-color: var(--light-green);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+}
+
+.send-button.enabled:hover {
+  background-color: #1faa5a;
 }
 
 .chat-footer {
@@ -160,4 +186,26 @@ body {
   color: gray;
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+/* 🔔 New Warning Message Styling */
+#warning-msg {
+  position: absolute;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffcccc;
+  color: #b00020;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+#warning-msg.show-warning {
+  opacity: 1;
 }
